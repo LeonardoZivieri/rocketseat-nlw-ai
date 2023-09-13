@@ -1,0 +1,47 @@
+
+# @name get-prompts
+GET http://localhost:3333/prompts
+
+
+###
+
+
+# @name upload
+POST http://localhost:3333/videos
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="audio-example.mp3"
+Content-Type: audio/mpeg
+
+< ./assets/test/audio-example.mp3
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+
+###
+
+
+# @name create-transcription
+POST http://localhost:3333/videos/d7ca959f-4219-4521-bcb8-3f848c214e73/transcription
+Content-Type: application/json
+
+{
+    "prompt": "developer, well-archtecture, azure, ai, chatgpt"
+}
+
+
+
+###
+
+
+# @name generate-ui-completion
+POST http://localhost:3333/ai/generate
+Content-Type: application/json
+
+{
+    "videoId": "a5c0cae0-8664-47a3-942e-8c655a166c8f",
+    "temperature": 0.7,
+    "template": "Gere um resumo sucintoda transcrição do vídeo informada a seguir: ''' {transcription} '''"
+}
+
