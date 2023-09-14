@@ -1,11 +1,5 @@
-import path from "node:path";
 import fs from "node:fs";
-import https from "node:https";
-import { randomUUID } from "node:crypto";
-import { pipeline } from "node:stream";
-import { promisify } from "node:util";
 import { FastifyInstance } from "fastify";
-import { fastifyMultipart } from "@fastify/multipart";
 import { prisma } from "../lib/prisma";
 import { z } from "zod";
 import { openai } from "../lib/openai";
@@ -41,7 +35,7 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
             const audioReadStream = fs.createReadStream(videoPath);
 
             const response = await openai.audio.transcriptions.create({
-                language: 'en',
+                language: 'pt',
                 file: audioReadStream,
                 model: 'whisper-1',
                 response_format: "json",
